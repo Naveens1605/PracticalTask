@@ -1,6 +1,6 @@
 package com.example.practicaltask.data
 
-data class Data(
+data class Post(
     val blurImage: String,
     val caption: String,
     val comments: String,

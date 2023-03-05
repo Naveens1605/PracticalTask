@@ -5,35 +5,150 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="post"
+            type="com.example.practicaltask.data.Post" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:cardElevation="40dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginHorizontal="8dp"
+        app:cardCornerRadius="30dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/group"/>
-
-        <ImageView
-            android:id="@+id/add_btn"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/group_267"/>
+            android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/option_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/group_267"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_iv"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:glide_src="@{post.userImage}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/dummy" />
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{post.userName}"
+                app:layout_constraintBottom_toBottomOf="@id/profile_iv"
+                app:layout_constraintStart_toEndOf="@id/profile_iv"
+                app:layout_constraintTop_toTopOf="@id/profile_iv" />
+
+            <ImageView
+                android:id="@+id/add_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/group_267"
+                app:layout_constraintBottom_toBottomOf="@id/profile_iv"
+                app:layout_constraintEnd_toStartOf="@id/more_btn"
+                app:layout_constraintTop_toTopOf="@id/profile_iv" />
+
+            <ImageView
+                android:id="@+id/more_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_more_vert"
+                app:layout_constraintBottom_toBottomOf="@id/add_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/add_btn" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/player_layout"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/profile_iv">
+
+                <ImageView
+                    android:id="@+id/post_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{post.posttype == 1?View.VISIBLE:View.GONE}"
+                    app:glide_src="@{post.content}"
+                    tools:src="@drawable/dummy" />
+
+                <VideoView
+                    android:id="@+id/post_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{post.posttype == 2?View.VISIBLE:View.GONE}" />
+
+                <ImageView
+                    android:id="@+id/play_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_play_btn"
+                    android:visibility="@{post.posttype == 2?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/bottom_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:weightSum="4"
+                app:layout_constraintTop_toBottomOf="@id/player_layout">
+
+                <ImageView
+                    android:id="@+id/whatsapp_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_whatsapp" />
+
+                <ImageView
+                    android:id="@+id/share_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_share" />
+
+                <TextView
+                    android:id="@+id/like_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:drawablePadding="8dp"
+                    android:text="@{post.likes}"
+                    app:drawableStartCompat="@drawable/ic_like"
+                    tools:text="400"/>
+
+                <TextView
+                    android:id="@+id/comments_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:drawablePadding="8dp"
+                    android:text="@{post.comments}"
+                    app:drawableStartCompat="@drawable/ic_comment"
+                    tools:text="100" />
+
+                <ImageView
+                    android:id="@+id/download_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_download" />
+
+            </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 </layout>

@@ -21,9 +21,15 @@ android {
     }
 
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://general.63-141-249-130.plesk.page/qfonapp-interview/api.json\""
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://general.63-141-249-130.plesk.page/qfonapp-interview/api.json\""
         }
     }
     compileOptions {
@@ -36,6 +42,7 @@ android {
     buildFeatures {
         viewBinding true
         dataBinding true
+        buildConfig = true
     }
 }
 

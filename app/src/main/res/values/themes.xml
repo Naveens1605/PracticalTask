@@ -22,4 +22,8 @@
     <style name="Theme.PracticalTask.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.PracticalTask.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.PracticalTask.Toolbar" parent="Theme.PracticalTask.AppBarOverlay" >
+        <item name="colorPrimary">@android:color/transparent</item>
+    </style>
 </resources>
